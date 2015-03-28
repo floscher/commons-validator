@@ -20,6 +20,8 @@ import java.io.Serializable;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
+import org.openstreetmap.josm.data.validation.routines.AbstractValidator;
+
 /**
  * <b>Regular Expression</b> validation (using JDK 1.4+ regex support).
  * <p>
@@ -65,7 +67,7 @@ import java.util.regex.Matcher;
  * @version $Revision$
  * @since Validator 1.4
  */
-public class RegexValidator implements Serializable {
+public class RegexValidator extends AbstractValidator implements Serializable {
 
     private static final long serialVersionUID = -8832409930574867162L;
 
@@ -136,6 +138,7 @@ public class RegexValidator implements Serializable {
      * @return <code>true</code> if the value is valid
      * otherwise <code>false</code>.
      */
+    @Override
     public boolean isValid(String value) {
         if (value == null) {
             return false;
@@ -211,6 +214,7 @@ public class RegexValidator implements Serializable {
      * Provide a String representation of this validator.
      * @return A String representation of this validator
      */
+    @Override
     public String toString() {
         StringBuffer buffer = new StringBuffer();
         buffer.append("RegexValidator{");

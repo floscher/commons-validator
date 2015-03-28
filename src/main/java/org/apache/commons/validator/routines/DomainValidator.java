@@ -22,6 +22,8 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Locale;
 
+import org.openstreetmap.josm.data.validation.routines.AbstractValidator;
+
 /**
  * <p><b>Domain name</b> validation routines.</p>
  *
@@ -62,7 +64,7 @@ import java.util.Locale;
  * @version $Revision$
  * @since Validator 1.4
  */
-public class DomainValidator implements Serializable {
+public class DomainValidator extends AbstractValidator implements Serializable {
 
     private static final long serialVersionUID = -4407125112880174009L;
 
@@ -144,6 +146,7 @@ public class DomainValidator implements Serializable {
      * @param domain the parameter to check for domain name syntax
      * @return true if the parameter is a valid domain name
      */
+    @Override
     public boolean isValid(String domain) {
         if (domain == null) {
             return false;

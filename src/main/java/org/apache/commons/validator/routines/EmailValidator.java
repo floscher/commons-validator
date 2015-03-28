@@ -20,6 +20,8 @@ import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.openstreetmap.josm.data.validation.routines.AbstractValidator;
+
 /**
  * <p>Perform email validations.</p>
  * <p>
@@ -33,7 +35,7 @@ import java.util.regex.Pattern;
  * @version $Revision$
  * @since Validator 1.4
  */
-public class EmailValidator implements Serializable {
+public class EmailValidator extends AbstractValidator implements Serializable {
 
     private static final long serialVersionUID = 1705927040799295880L;
 
@@ -104,26 +106,33 @@ public class EmailValidator implements Serializable {
      *              value is considered invalid.
      * @return true if the email address is valid.
      */
+    @Override
     public boolean isValid(String email) {
         if (email == null) {
             return false;
         }
 
         if (email.endsWith(".")) { // check this first - it's cheap!
+            setErrorMessage("E-mail address is invalid");
             return false;
         }
 
         // Check the whole email address structure
         Matcher emailMatcher = EMAIL_PATTERN.matcher(email);
         if (!emailMatcher.matches()) {
+            setErrorMessage("E-mail address is invalid");
             return false;
         }
 
-        if (!isValidUser(emailMatcher.group(1))) {
+        String username = emailMatcher.group(1);
+        if (!isValidUser(username)) {
+            setErrorMessage("E-mail address contains an invalid username: {0}", username);
             return false;
         }
 
-        if (!isValidDomain(emailMatcher.group(2))) {
+        String domain = emailMatcher.group(2);
+        if (!isValidDomain(domain)) {
+            setErrorMessage("E-mail address contains an invalid domain: {0}", domain);
             return false;
         }
 

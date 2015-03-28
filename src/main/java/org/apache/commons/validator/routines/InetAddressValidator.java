@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.openstreetmap.josm.data.validation.routines.AbstractValidator;
+
 /**
  * <p><b>InetAddress</b> validation and conversion routines (<code>java.net.InetAddress</code>).</p>
  *
@@ -34,7 +36,7 @@ import java.util.List;
  * @version $Revision$
  * @since Validator 1.4
  */
-public class InetAddressValidator implements Serializable {
+public class InetAddressValidator extends AbstractValidator implements Serializable {
 
     private static final long serialVersionUID = -919201640201914789L;
 
@@ -62,6 +64,7 @@ public class InetAddressValidator implements Serializable {
      * @param inetAddress the string to validate
      * @return true if the string validates as an IP address
      */
+    @Override
     public boolean isValid(String inetAddress) {
         return isValidInet4Address(inetAddress) || isValidInet6Address(inetAddress);
     }

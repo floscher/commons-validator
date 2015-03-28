@@ -24,6 +24,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.openstreetmap.josm.data.validation.routines.AbstractValidator;
+
 /**
  * <p><b>URL Validation</b> routines.</p>
  * Behavior of validation is modified by passing in options:
@@ -72,7 +74,7 @@ import java.util.regex.Pattern;
  * @version $Revision$
  * @since Validator 1.4
  */
-public class UrlValidator implements Serializable {
+public class UrlValidator extends AbstractValidator implements Serializable {
 
     private static final long serialVersionUID = 7557161713937335013L;
 
@@ -282,6 +284,7 @@ public class UrlValidator implements Serializable {
      * value is considered invalid.
      * @return true if the url is valid.
      */
+    @Override
     public boolean isValid(String value) {
         if (value == null) {
             return false;
@@ -290,11 +293,13 @@ public class UrlValidator implements Serializable {
         // Check the whole url address structure
         Matcher urlMatcher = URL_PATTERN.matcher(value);
         if (!urlMatcher.matches()) {
+            setErrorMessage("URL is invalid");
             return false;
         }
 
         String scheme = urlMatcher.group(PARSE_URL_SCHEME);
         if (!isValidScheme(scheme)) {
+            setErrorMessage("URL contains an invalid protocol: {0}", scheme);
             return false;
         }
 
@@ -304,19 +309,26 @@ public class UrlValidator implements Serializable {
         } else {
             // Validate the authority
             if (!isValidAuthority(authority)) {
+                setErrorMessage("URL contains an invalid authority: {0}", authority);
                 return false;
             }
         }
 
-        if (!isValidPath(urlMatcher.group(PARSE_URL_PATH))) {
+        String path = urlMatcher.group(PARSE_URL_PATH);
+        if (!isValidPath(path)) {
+            setErrorMessage("URL contains an invalid path: {0}", path);
             return false;
         }
 
-        if (!isValidQuery(urlMatcher.group(PARSE_URL_QUERY))) {
+        String query = urlMatcher.group(PARSE_URL_QUERY);
+        if (!isValidQuery(query)) {
+            setErrorMessage("URL contains an invalid query: {0}", query);
             return false;
         }
 
-        if (!isValidFragment(urlMatcher.group(PARSE_URL_FRAGMENT))) {
+        String fragment = urlMatcher.group(PARSE_URL_FRAGMENT);
+        if (!isValidFragment(fragment)) {
+            setErrorMessage("URL contains an invalid fragment: {0}", fragment);
             return false;
         }
 
