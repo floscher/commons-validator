@@ -211,7 +211,7 @@ public class DomainValidator extends AbstractValidator implements Serializable {
      */
     public boolean isValidInfrastructureTld(String iTld) {
         iTld = unicodeToASCII(iTld);
-        return Arrays.binarySearch(INFRASTRUCTURE_TLDS, (chompLeadingDot(iTld.toLowerCase(Locale.ENGLISH)))) >= 0;
+        return Arrays.binarySearch(INFRASTRUCTURE_TLDS, chompLeadingDot(iTld.toLowerCase(Locale.ENGLISH))) >= 0;
     }
 
     /**
@@ -1083,7 +1083,7 @@ public class DomainValidator extends AbstractValidator implements Serializable {
     /**
      * Converts potentially Unicode input to punycode.
      * If conversion fails, returns the original input.
-     * 
+     *
      * @param input the string to convert, not null
      * @return converted input, or original input if conversion fails
      */
@@ -1112,7 +1112,7 @@ public class DomainValidator extends AbstractValidator implements Serializable {
 
     /*
      * Helper method to invoke java.net.IDN.toAscii(String).
-     * Allows code to be compiled with Java 1.4 and 1.5 
+     * Allows code to be compiled with Java 1.4 and 1.5
      * @throws IllegalArgumentException if the input string doesn't conform to RFC 3490 specification
      */
     private static final String toASCII(String line) throws IllegalArgumentException {
