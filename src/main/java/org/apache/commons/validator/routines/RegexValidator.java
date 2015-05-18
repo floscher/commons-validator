@@ -32,10 +32,8 @@ import org.openstreetmap.josm.data.validation.routines.AbstractValidator;
  * expressions:
  * </p>
  * <pre>
- * <code>
  * String[] regexs = new String[] {...};
  * RegexValidator validator = new RegexValidator(regexs, false);
- * </code>
  * </pre>
  *
  * <ul>
@@ -122,7 +120,7 @@ public class RegexValidator extends AbstractValidator implements Serializable {
             throw new IllegalArgumentException("Regular expressions are missing");
         }
         patterns = new Pattern[regexs.length];
-        int flags =  caseSensitive ? 0: Pattern.CASE_INSENSITIVE;
+        int flags = caseSensitive ? 0: Pattern.CASE_INSENSITIVE;
         for (int i = 0; i < regexs.length; i++) {
             if (regexs[i] == null || regexs[i].length() == 0) {
                 throw new IllegalArgumentException("Regular expression[" + i + "] is missing");
@@ -197,7 +195,7 @@ public class RegexValidator extends AbstractValidator implements Serializable {
                 if (count == 1) {
                     return matcher.group(1);
                 }
-                StringBuffer buffer = new StringBuffer();
+                StringBuilder buffer = new StringBuilder();
                 for (int j = 0; j < count; j++) {
                     String component = matcher.group(j+1);
                     if (component != null) {
@@ -216,15 +214,15 @@ public class RegexValidator extends AbstractValidator implements Serializable {
      */
     @Override
     public String toString() {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         buffer.append("RegexValidator{");
         for (int i = 0; i < patterns.length; i++) {
             if (i > 0) {
-                buffer.append(",");
+                buffer.append(',');
             }
             buffer.append(patterns[i].pattern());
         }
-        buffer.append("}");
+        buffer.append('}');
         return buffer.toString();
     }
 
