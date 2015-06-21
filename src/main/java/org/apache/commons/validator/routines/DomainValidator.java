@@ -128,7 +128,7 @@ public class DomainValidator extends AbstractValidator implements Serializable {
      * @return the singleton instance of this validator
      */
     public static DomainValidator getInstance(boolean allowLocal) {
-       if(allowLocal) {
+       if (allowLocal) {
           return DOMAIN_VALIDATOR_WITH_LOCAL;
        }
        return DOMAIN_VALIDATOR;
@@ -194,7 +194,7 @@ public class DomainValidator extends AbstractValidator implements Serializable {
      */
     public boolean isValidTld(String tld) {
         tld = unicodeToASCII(tld);
-        if(allowLocal && isValidLocalTld(tld)) {
+        if (allowLocal && isValidLocalTld(tld)) {
            return true;
         }
         return isValidInfrastructureTld(tld)

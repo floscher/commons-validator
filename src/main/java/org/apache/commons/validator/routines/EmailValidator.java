@@ -83,7 +83,7 @@ public class EmailValidator extends AbstractValidator implements Serializable {
      * @return singleton instance of this validator
      */
     public static EmailValidator getInstance(boolean allowLocal) {
-        if(allowLocal) {
+        if (allowLocal) {
            return EMAIL_VALIDATOR_WITH_LOCAL;
         }
         return EMAIL_VALIDATOR;

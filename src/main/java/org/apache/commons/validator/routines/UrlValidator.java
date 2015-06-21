@@ -133,7 +133,7 @@ public class UrlValidator extends AbstractValidator implements Serializable {
     private static final Pattern SCHEME_PATTERN = Pattern.compile(SCHEME_REGEX);
 
     // Drop numeric, and  "+-." for now
-    // TODO does not allow for optional userinfo. 
+    // TODO does not allow for optional userinfo.
     // Validation of character set is done by isValidAuthority
     private static final String AUTHORITY_CHARS_REGEX = "\\p{Alnum}\\-\\.";
 
@@ -408,7 +408,7 @@ public class UrlValidator extends AbstractValidator implements Serializable {
         }
 
         String extra = authorityMatcher.group(PARSE_AUTHORITY_EXTRA);
-        if (extra != null && extra.trim().length() > 0){
+        if (extra != null && extra.trim().length() > 0) {
             return false;
         }
 

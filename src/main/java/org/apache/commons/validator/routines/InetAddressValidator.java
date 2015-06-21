@@ -93,7 +93,7 @@ public class InetAddressValidator extends AbstractValidator implements Serializa
 
             try {
                 iIpSegment = Integer.parseInt(ipSegment);
-            } catch(NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 return false;
             }
 
@@ -114,7 +114,7 @@ public class InetAddressValidator extends AbstractValidator implements Serializa
      * Validates an IPv6 address. Returns true if valid.
      * @param inet6Address the IPv6 address to validate
      * @return true if the argument contains a valid IPv6 address
-     * 
+     *
      * @since 1.4.1
      */
     public boolean isValidInet6Address(String inet6Address) {
