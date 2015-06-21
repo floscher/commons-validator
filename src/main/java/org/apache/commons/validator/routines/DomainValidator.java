@@ -125,7 +125,7 @@ public class DomainValidator implements Serializable {
      * @return the singleton instance of this validator
      */
     public static DomainValidator getInstance(boolean allowLocal) {
-       if(allowLocal) {
+       if (allowLocal) {
           return DOMAIN_VALIDATOR_WITH_LOCAL;
        }
        return DOMAIN_VALIDATOR;
@@ -190,7 +190,7 @@ public class DomainValidator implements Serializable {
      */
     public boolean isValidTld(String tld) {
         tld = unicodeToASCII(tld);
-        if(allowLocal && isValidLocalTld(tld)) {
+        if (allowLocal && isValidLocalTld(tld)) {
            return true;
         }
         return isValidInfrastructureTld(tld)
@@ -207,7 +207,7 @@ public class DomainValidator implements Serializable {
      */
     public boolean isValidInfrastructureTld(String iTld) {
         iTld = unicodeToASCII(iTld);
-        return Arrays.binarySearch(INFRASTRUCTURE_TLDS, (chompLeadingDot(iTld.toLowerCase(Locale.ENGLISH)))) >= 0;
+        return Arrays.binarySearch(INFRASTRUCTURE_TLDS, chompLeadingDot(iTld.toLowerCase(Locale.ENGLISH))) >= 0;
     }
 
     /**
@@ -1257,7 +1257,7 @@ public class DomainValidator implements Serializable {
     /**
      * Converts potentially Unicode input to punycode.
      * If conversion fails, returns the original input.
-     * 
+     *
      * @param input the string to convert, not null
      * @return converted input, or original input if conversion fails
      */
