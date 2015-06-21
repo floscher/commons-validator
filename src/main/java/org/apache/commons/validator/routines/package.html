@@ -123,7 +123,7 @@
     <li><code>isValid(<i>value</i>, Locale)</code></li>
     <li><code>isValid(<i>value</i>, <i>pattern</i>, Locale)</code></li>
 </ul>
-<p>The following methods are provided to validate a date/time and convert it to either a 
+<p>The following methods are provided to validate a date/time and convert it to either a
    <code>java.util.Date</code> or <code>java.util.Calendar</code>:
 </p>
 <ul>
@@ -187,9 +187,9 @@
    components of a date:
 </p>
 <pre>
-      // Check if the date is in the current month 
-      int compare = validator.compareMonths(fooDate, new Date(), null); 
-      if (compare == 0) { 
+      // Check if the date is in the current month
+      int compare = validator.compareMonths(fooDate, new Date(), null);
+      if (compare == 0) {
           // do current month processing
           return;
       }
@@ -272,7 +272,7 @@
     <li><code>isValid(<i>value</i>, <i>pattern</i>, Locale)</code></li>
 </ul>
 
-<p>The following methods are provided to validate a number and convert it one of 
+<p>The following methods are provided to validate a number and convert it one of
    the <code>java.lang.Number</code> implementations:</p>
 <ul>
     <li><code>validate(<i>value</i>)</code></li>
@@ -302,7 +302,7 @@
 <h3>3.4 Comparing Numbers</h3>
 <p>
    As well as validating that a value is a valid number, these validators
-   also provide functions for validating the <i>minimum</i>, <i>maximum</i> 
+   also provide functions for validating the <i>minimum</i>, <i>maximum</i>
    and <i>range</i> of a value.
 </p>
 <pre>
@@ -316,7 +316,7 @@
 <a name="numeric.currency"></a>
 <h3>3.5 Currency Validation</h3>
 <p>
-   A default <a href="CurrencyValidator.html">Currency Validator</a> 
+   A default <a href="CurrencyValidator.html">Currency Validator</a>
    implementation is provided, although all the <i>numeric</i> validators
    support currency validation. The default implementation converts
    currency amounts to a <code>java.math.BigDecimal</code> and additionally
@@ -341,14 +341,14 @@
 
 <p>
    If, for example, you want to use the <a href="IntegerValidator.html">Integer
-   Validator</a> to validate a currency, then you can simply create a 
+   Validator</a> to validate a currency, then you can simply create a
    new instance with the appropriate <i>format style</i>. Note that
    the other validators do not support the <i>lenient</i> currency symbol
    validation.
 </p>
 
 <pre>
-      IntegerValidator validator = 
+      IntegerValidator validator =
           new IntegerValidator(true, IntegerValidator.CURRENCY_FORMAT);
 
       String pattern = "#,###" + '\u00A4' + '\u00A4';  // Use international symbol
@@ -363,12 +363,12 @@
 <a name="numeric.percent"></a>
 <h3>3.6 Percent Validation</h3>
 <p>
-   A default <a href="PercentValidator.html">Percent Validator</a> 
+   A default <a href="PercentValidator.html">Percent Validator</a>
    implementation is provided, although the <i>Float</i>,
    <i>Double</i> and <i>BigDecimal</i> validators also support
    percent validation. The default implementation converts
    percent amounts to a <code>java.math.BigDecimal</code> and additionally
-   it provides <i>lenient</i> percent symbol validation. That is, percent 
+   it provides <i>lenient</i> percent symbol validation. That is, percent
    amounts are valid with <i>or</i> without the percent symbol.
 </p>
 
@@ -390,14 +390,14 @@
 
 <p>
    If, for example, you want to use the <a href="FloatValidator.html">Float
-   Validator</a> to validate a percent, then you can simply create a 
+   Validator</a> to validate a percent, then you can simply create a
    new instance with the appropriate <i>format style</i>. Note that
    the other validators do not support the <i>lenient</i> percent symbol
    validation.
 </p>
 
 <pre>
-      FloatValidator validator = 
+      FloatValidator validator =
           new FloatValidator(true, FloatValidator.PERCENT_FORMAT);
 
       Float fooPercent = validator.validate("20%", "###%");
@@ -409,7 +409,7 @@
 </pre>
 <p>
    <strong>Note</strong>: in theory the other numeric validators besides
-   <i>Float</i>, <i>Double</i> and <i>BigDecimal</i> (i.e. <i>Byte</i>, 
+   <i>Float</i>, <i>Double</i> and <i>BigDecimal</i> (i.e. <i>Byte</i>,
    <i>Short</i>, <i>Integer</i>, <i>Long</i> and <i>BigInteger</i>)
    also support percent validation. However, since they don't allow fractions
    they will only work with percentages greater than 100%.
@@ -526,7 +526,7 @@
 <h3>4.3 Check Digit validation/calculation</h3>
 <p>
    <a href="checkdigit/CheckDigit.html">CheckDigit</a> defines a new
-   type for the calculation and validation of check digits with the 
+   type for the calculation and validation of check digits with the
    following methods:
 </p>
 <ul>
