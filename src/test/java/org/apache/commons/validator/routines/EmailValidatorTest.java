@@ -370,6 +370,14 @@ public class EmailValidatorTest extends TestCase {
         assertTrue(validator.isValid("john56789.john56789.john56789.john56789.john56789.john56789.john@example.com"));
 
         assertFalse(validator.isValid("john56789.john56789.john56789.john56789.john56789.john56789.john5@example.com"));
+
+        assertTrue(validator.isValid("\\>escape\\\\special\\^characters\\<@example.com"));
+
+        assertTrue(validator.isValid("Abc\\@def@example.com"));
+
+        assertFalse(validator.isValid("Abc@def@example.com"));
+
+        assertTrue(validator.isValid("space\\ monkey@example.com"));
     }
 
     /**
@@ -499,5 +507,9 @@ public class EmailValidatorTest extends TestCase {
                 "Aeneantemporipsummassaaconsecteturturpisfaucibusultrices.Praesentsodalesmaurisquisportafermentum."+
                 "Etiamnisinislvenenatisvelauctorutullamcorperinjusto.Proinvelligulaerat.Phasellusvestibulumgravidamassanonfeugiat."+
                 "Maecenaspharetraeuismodmetusegetefficitur.Suspendisseamet@gmail.com"));
+    }
+
+    public void testValidator374() {
+        assertTrue(validator.isValid("abc@school.school"));
     }
 }

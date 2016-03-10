@@ -16,9 +16,9 @@
  */
 package org.apache.commons.validator.routines;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.validator.ResultPair;
+
+import junit.framework.TestCase;
 
 /**
  * Performs Validation Test for url validations.
@@ -91,7 +91,7 @@ public class UrlValidatorTest extends TestCase {
          statusPerLine = 6;
       }
       do {
-         StringBuffer testBuffer = new StringBuffer();
+          StringBuilder testBuffer = new StringBuilder();
          boolean expected = true;
          for (int testPartsIndexIndex = 0; testPartsIndexIndex < testPartsIndex.length; ++testPartsIndexIndex) {
             int index = testPartsIndex[testPartsIndexIndex];
@@ -334,7 +334,7 @@ public class UrlValidatorTest extends TestCase {
    }
 
    private String testPartsIndextoString() {
-      StringBuffer carryMsg = new StringBuffer("{");
+       StringBuilder carryMsg = new StringBuilder("{");
       for (int testPartsIndexIndex = 0; testPartsIndexIndex < testPartsIndex.length; ++testPartsIndexIndex) {
          carryMsg.append(testPartsIndex[testPartsIndexIndex]);
          if (testPartsIndexIndex < testPartsIndex.length - 1) {
@@ -409,7 +409,66 @@ public class UrlValidatorTest extends TestCase {
 //        assertTrue(validator.isValid("http://test.xn--hlcj6aya9esc7a")); // Tamil
     }
 
-   
+   public void testValidator361() {
+       UrlValidator validator = new UrlValidator();
+       assertTrue(validator.isValid("http://hello.tokyo/"));
+    }
+
+   public void testValidator363(){
+        UrlValidator urlValidator = new UrlValidator();
+        assertTrue(urlValidator.isValid("http://www.example.org/a/b/hello..world"));
+        assertTrue(urlValidator.isValid("http://www.example.org/a/hello..world"));
+        assertTrue(urlValidator.isValid("http://www.example.org/hello.world/"));
+        assertTrue(urlValidator.isValid("http://www.example.org/hello..world/"));
+        assertTrue(urlValidator.isValid("http://www.example.org/hello.world"));
+        assertTrue(urlValidator.isValid("http://www.example.org/hello..world"));
+        assertTrue(urlValidator.isValid("http://www.example.org/..world"));
+        assertTrue(urlValidator.isValid("http://www.example.org/.../world"));
+        assertFalse(urlValidator.isValid("http://www.example.org/../world"));
+        assertFalse(urlValidator.isValid("http://www.example.org/.."));
+        assertFalse(urlValidator.isValid("http://www.example.org/../"));
+        assertFalse(urlValidator.isValid("http://www.example.org/./.."));
+        assertFalse(urlValidator.isValid("http://www.example.org/././.."));
+        assertTrue(urlValidator.isValid("http://www.example.org/..."));
+        assertTrue(urlValidator.isValid("http://www.example.org/.../"));
+        assertTrue(urlValidator.isValid("http://www.example.org/.../.."));
+    }
+
+   public void testValidator375() {
+       UrlValidator validator = new UrlValidator();
+       String url = "http://[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210]:80/index.html";
+       assertTrue("IPv6 address URL should validate: " + url, validator.isValid(url));
+       url = "http://[::1]:80/index.html";
+       assertTrue("IPv6 address URL should validate: " + url, validator.isValid(url));
+       url = "http://FEDC:BA98:7654:3210:FEDC:BA98:7654:3210:80/index.html";
+       assertFalse("IPv6 address without [] should not validate: " + url, validator.isValid(url));
+    }
+
+
+   public void testValidator353() { // userinfo
+       UrlValidator validator = new UrlValidator();
+       assertTrue(validator.isValid("http://www.apache.org:80/path"));
+       assertTrue(validator.isValid("http://user:pass@www.apache.org:80/path"));
+       assertTrue(validator.isValid("http://user:@www.apache.org:80/path"));
+       assertTrue(validator.isValid("http://us%00er:-._~!$&'()*+,;=@www.apache.org:80/path"));
+       assertFalse(validator.isValid("http://:pass@www.apache.org:80/path"));
+       assertFalse(validator.isValid("http://:@www.apache.org:80/path"));
+       assertFalse(validator.isValid("http://user:pa:ss@www.apache.org/path"));
+       assertFalse(validator.isValid("http://user:pa@ss@www.apache.org/path"));
+   }
+
+   public void testValidator382() {
+       UrlValidator validator = new UrlValidator();
+       assertTrue(validator.isValid("ftp://username:password@example.com:8042/over/there/index.dtb?type=animal&name=narwhal#nose"));
+   }
+
+   public void testValidator380() {
+       UrlValidator validator = new UrlValidator();
+       assertTrue(validator.isValid("http://www.apache.org:80/path"));       
+       assertTrue(validator.isValid("http://www.apache.org:8/path")); 
+       assertTrue(validator.isValid("http://www.apache.org:/path"));
+   }
+
    /**
     * Only used to debug the unit tests.
     * @param argv

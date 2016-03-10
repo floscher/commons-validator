@@ -98,6 +98,13 @@ public class CreditCardValidator implements Serializable {
     public static final long DINERS = 1 << 4;
 
     /**
+     * Option specifying that VPay (Visa) cards are allowed.
+     * @since 1.5.0
+     */
+    public static final long VPAY = 1 << 5;
+
+
+    /**
      * The CreditCardTypes that are allowed to pass validation.
      */
     private final List<CodeValidator> cardTypes = new ArrayList<CodeValidator>();
@@ -125,6 +132,11 @@ public class CreditCardValidator implements Serializable {
     /** Visa Card Validator */
     public static final CodeValidator VISA_VALIDATOR = new CodeValidator("^(4)(\\d{12}|\\d{15})$", LUHN_VALIDATOR);
 
+    /** VPay (Visa) Card Validator 
+     * @since 1.5.0
+     */
+    public static final CodeValidator VPAY_VALIDATOR = new CodeValidator("^(4)(\\d{12,18})$", LUHN_VALIDATOR);
+
     /**
      * Create a new CreditCardValidator with default options.
      */
@@ -143,6 +155,10 @@ public class CreditCardValidator implements Serializable {
 
         if (isOn(options, VISA)) {
             this.cardTypes.add(VISA_VALIDATOR);
+        }
+
+        if (isOn(options, VPAY)) {
+            this.cardTypes.add(VPAY_VALIDATOR);
         }
 
         if (isOn(options, AMEX)) {
